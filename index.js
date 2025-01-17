@@ -43,10 +43,72 @@
 
 
 // formula for calculating the area of a cirle which is PI multiplied by the radius, squared:
-const pi = 3.1415;
-const area = pi * radius * radius;
-const plantSpace = .8; // this is the plant space required in square meters
-let numberOfPlants = 20;
-let plantWeeklyGrowthRate = 2;
 
+const PI = 3.1415; 
+const gardenRadius = 5; // Garden radius in meters
+const gardenArea = PI * gardenRadius * gardenRadius; 
+const spacePerPlant = 0.8; 
+const maxPlantsCapacity = Math.floor(gardenArea / spacePerPlant); 
 
+const startingPlantCount = 20; // Initial number of plants
+
+console.log("Part 1: Growth Recommendations");
+
+// Week 1
+let plantsAfterWeek1 = startingPlantCount * 2; // Plants double after 1 week
+if (plantsAfterWeek1 > 0.8 * maxPlantsCapacity) {
+  console.log("Week 1: Prune the plants to prevent overcrowding.");
+} else if (plantsAfterWeek1 > 0.5 * maxPlantsCapacity) {
+  console.log("Week 1: Monitor the plants, growth is acceptable.");
+} else {
+  console.log("Week 1: Plant more plants, there is room.");
+}
+
+// Week 2
+let plantsAfterWeek2 = startingPlantCount * 2 * 2; // Plants double again in week 2
+if (plantsAfterWeek2 > 0.8 * maxPlantsCapacity) {
+  console.log("Week 2: Prune the plants to prevent overcrowding.");
+} else if (plantsAfterWeek2 > 0.5 * maxPlantsCapacity) {
+  console.log("Week 2: Monitor the plants, growth is acceptable.");
+} else {
+  console.log("Week 2: Plant more plants, there is room.");
+}
+
+// Week 3
+let plantsAfterWeek3 = startingPlantCount * 2 * 2 * 2; // Plants double again in week 3
+if (plantsAfterWeek3 > 0.8 * maxPlantsCapacity) {
+  console.log("Week 3: Prune the plants to prevent overcrowding.");
+} else if (plantsAfterWeek3 > 0.5 * maxPlantsCapacity) {
+  console.log("Week 3: Monitor the plants, growth is acceptable.");
+} else {
+  console.log("Week 3: Plant more plants, there is room.");
+}
+
+console.log("Part 2: Space Requirements");
+
+// Part 2: Additional space requirements
+const initialPlantCountForPart2 = 100; // Starting number of plants for part 2
+const plantsAfter10Weeks = initialPlantCountForPart2 * Math.pow(2, 10); // Plants double every week for 10 weeks
+const totalSpaceNeeded = plantsAfter10Weeks * spacePerPlant;
+const extraSpaceNeeded = totalSpaceNeeded - gardenArea; 
+const expandedGardenRadius = Math.sqrt(totalSpaceNeeded / PI);
+
+console.log(` - Total plants after 10 weeks: ${plantsAfter10Weeks}`);
+console.log(` - Additional space required: ${extraSpaceNeeded.toFixed(2)} square meters`);
+console.log(` - New radius for expanded garden: ${expandedGardenRadius.toFixed(2)} meters`);
+
+console.log("Part 3: Error Handling");
+
+// Part 3: Error handling
+const startingPlantCountForPart3 = 100; // Starting number of plants for part 3
+const plantsAfter10WeeksForPart3 = startingPlantCountForPart3 * Math.pow(2, 10); // Plants double every week for 10 weeks
+const spaceNeededForPart3 = plantsAfter10WeeksForPart3 * spacePerPlant;
+
+try {
+  if (spaceNeededForPart3 > gardenArea) {
+    throw new Error("The garden does not have enough space for the plants.");
+  }
+  console.log(" - Plants fit within the original garden.");
+} catch (error) {
+  console.error(`Error: ${error.message}`);
+}
